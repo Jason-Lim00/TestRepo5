@@ -2,6 +2,10 @@
 if(TRUE)
 {
   $hashed_password = crypt('mypassword');
+  
+  # Test Comment
+  
+  $hashed_password = crypt('mypassword');
 }
 
 
