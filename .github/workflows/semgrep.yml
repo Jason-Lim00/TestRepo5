@@ -19,4 +19,8 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci --verbose --json
+    - run: semgrep ci --verbose --json > semgrep-run.json
+    - uses: actions/upload-artifact@v3
+      with:
+        name: semgrep-json-output
+        path: semgrep-run.json
