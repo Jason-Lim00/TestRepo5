@@ -1,0 +1,4 @@
+version: v1
+tags:
+  - tagtest1
+  - tagtest2
