@@ -1,0 +1,7 @@
+rules:
+- id: no_hello_world
+  languages:
+    - python
+  message: Semgrep found a match
+  pattern: print("Hello World")
+  severity: WARNING
