@@ -18,7 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci --verbose
-    - run: |
-        curl -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" http://semgrep.dev/api/v1/deployments/jason_lim00/projects
+    
+  tag:
+    name: Tag project
+    runs-on: ubuntu-latest
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    steps:
+      - run: |
+          curl -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" http://semgrep.dev/api/v1/deployments/jason_lim00/projects
 
   
