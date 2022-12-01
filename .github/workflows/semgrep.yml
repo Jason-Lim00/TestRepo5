@@ -27,6 +27,6 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     steps:
       - run: |
-          curl -X GET "http://semgrep.dev/api/v1/deployments/jason_lim00/projects"
+          curl http://semgrep.dev/api/v1/deployments/jason_lim00/projects
 
   
