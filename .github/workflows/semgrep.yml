@@ -20,12 +20,13 @@ jobs:
     - run: semgrep ci --verbose
     
   tag:
+    needs: semgrep
     name: Tag project
     runs-on: ubuntu-latest
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     steps:
       - run: |
-          curl -H "Authorization: bearer 8439fd54f4178ec6211c7761cbcfdaab6eb2edb7181cc1d375489cf3a19f8f6c" http://semgrep.dev/api/v1/deployments/jason_lim00/projects
+          curl -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" http://semgrep.dev/api/v1/deployments/jason_lim00/projects
 
   
