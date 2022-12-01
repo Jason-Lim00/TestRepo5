@@ -18,5 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci --verbose
-    - run: echo This is a message
+    - run: |
+        curl -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" http://semgrep.dev/api/v1/deployments/jason_lim00/projects
+
   
