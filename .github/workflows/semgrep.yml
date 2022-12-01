@@ -6,8 +6,6 @@ on:
     - master
     paths:
     - .github/workflows/semgrep.yml
-  schedule:
-  - cron: '0 0 * * 0'
 name: Semgrep
 jobs:
   semgrep:
@@ -20,3 +18,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci --verbose
+    - run: echo This is a message
+  
