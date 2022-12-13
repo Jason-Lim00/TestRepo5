@@ -17,7 +17,7 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep publish --help
+    - run: semgrep login && semgrep publish --help
     
   tag:
     needs: semgrep
