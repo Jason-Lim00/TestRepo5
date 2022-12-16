@@ -19,3 +19,14 @@ jobs:
     - uses: actions/checkout@v3
     - run: semgrep ci
   
+  tag:
+    needs: semgrep
+    name: Tag project
+    runs-on: ubuntu-latest
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    steps:
+      - run: |
+          curl \
+          -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" \
+          https://semgrep.dev/api/v1/deployments/jason_lim00/findings?repos="${GITHUB_REPOSITORY}"
