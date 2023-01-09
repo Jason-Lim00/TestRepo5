@@ -21,7 +21,7 @@ jobs:
   
   tag:
     needs: semgrep
-    name: Tag project
+    name: Tag project time
     runs-on: ubuntu-latest
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
