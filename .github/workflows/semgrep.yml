@@ -17,12 +17,12 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci --verbose --sarif --output=semgrep-run.sarif
+    - run: semgrep ci --verbose --time --json --output=semgrep-run.json
     - name: upload-artifact
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: semgrep-run.sarif
-        path: semgrep-run.sarif
+        name: semgrep-run.json
+        path: semgrep-run.json
         retention-days: 5
   
