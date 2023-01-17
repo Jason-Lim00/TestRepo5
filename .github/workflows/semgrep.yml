@@ -17,13 +17,12 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci 
-    - name: upload-logs
+    - run: semgrep ci --verbose --sarif --output=semgrep-run.sarif
+    - name: upload-artifact
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: semgrep-logs.txt
-        path: ~/.semgrep/last.log
+        name: semgrep-run.sarif
+        path: semgrep-run.sarif
         retention-days: 5
   
-
