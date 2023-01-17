@@ -17,16 +17,12 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci
+    - run: semgrep ci --verbose --time --json --output=semgrep-run.json
+    - name: upload-artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: semgrep-run.json
+        path: semgrep-run.json
+        retention-days: 5
   
-  tag:
-    needs: semgrep
-    name: Tag project time
-    runs-on: ubuntu-latest
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    steps:
-      - run: |
-          curl \
-          -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" \
-          https://semgrep.dev/api/v1/deployments/jason_lim00/findings?repos="${GITHUB_REPOSITORY}"
