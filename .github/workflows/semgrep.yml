@@ -18,15 +18,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci 
-    - name: package-logs
-      if: always()
-      run: ~/.semgrep/last.log > semgrep-logs.txt
     - name: upload-logs
       if: always()
       uses: actions/upload-artifact@v3
       with:
         name: semgrep-logs.txt
-        path: semgrep-logs.txt
+        path: ~/.semgrep/last.log
         retention-days: 5
   
 
