@@ -18,4 +18,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci --sarif
+    - name: upload-artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: semgrep-run.sarif
+        path: semgrep-run.sarif
+        retention-days: 5
   
