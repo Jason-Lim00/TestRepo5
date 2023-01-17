@@ -20,13 +20,13 @@ jobs:
     - run: semgrep ci 
     - name: package-logs
       if: always()
-      run: tar czf logs.tgz ~/.semgrep/last.log
+      run: ~/.semgrep/last.log > semgrep-logs.txt
     - name: upload-logs
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: logs.tgz
-        path: logs.tgz
+        name: semgrep-logs.txt
+        path: semgrep-logs.txt
         retention-days: 5
   
 
