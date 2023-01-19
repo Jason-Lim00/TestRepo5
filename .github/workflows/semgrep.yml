@@ -28,7 +28,6 @@ jobs:
     steps:
       - run: |
           curl \
-          -X PATCH \
           -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" \
           https://semgrep.dev/api/v1/deployments/jason_lim00/repos?name="${GITHUB_REPOSITORY}" \
           -d '{"tags": \["sometaga", "sometagb", "BAPPID-1234"\]}'
