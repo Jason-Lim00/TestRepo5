@@ -29,4 +29,6 @@ jobs:
       - run: |
           curl \
           -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" \
-          -X PATCH https://semgrep.dev/api/v1/deployments/jason_lim00/projects/${GITHUB_REPOSITORY} \
+          -X PATCH https://semgrep.dev/api/v1/deployments/jason_lim00/projects/${GITHUB_REPOSITORY}/tags \
+          -d '{"tags": \["sometaga", "sometagb", "BAPPID1234"\]}'
+          
