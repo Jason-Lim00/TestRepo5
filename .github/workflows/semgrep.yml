@@ -18,7 +18,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build lockfile
-      run: gradle dependencies --write-locks 
+      run: ./gradlew dependencies --write-locks 
     - name: Upload lockfile Artifact     
       uses: actions/upload-artifact@v3
       with:
