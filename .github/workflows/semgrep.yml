@@ -8,7 +8,24 @@ on:
     - .github/workflows/semgrep.yml
 name: Semgrep
 jobs:
+  buildGradleLockfile: 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Build lockfile
+      run: gradle dependencies --write-locks
+    - name: Upload lockfile Artifact     
+      uses: actions/upload-artifact@v3
+      with:
+        name: gradlelockfile
+        path: gradle.lockfile
   semgrep:
+    needs: buildGradleLockfile
     name: Scan
     runs-on: ubuntu-latest
     env:
@@ -17,19 +34,6 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci --verbose
-  
-  tag:
-    needs: semgrep
-    name: Tag project time
-    runs-on: ubuntu-latest
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    steps:
-      - run: |
-          curl \
-          -H "Authorization: bearer ${{ secrets.SEMGREP_APP_TOKEN }}" \
-          -X PATCH https://semgrep.dev/api/v1/deployments/jason_lim00/projects/${GITHUB_REPOSITORY} \
-          -H 'Content-Type: application/json' \
-          -d '{"tags": ["sometaga", "sometagb", "BAPPID1234"]}'
+    - run: semgrep ci
+
           
