@@ -23,7 +23,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: gradlelockfile
-        path: /home/runner/work/TestRepo5/TestRepo5/gradle.lockfile
+        path: TestRepo5/gradle.lockfile
   semgrep:
     needs: buildGradleLockfile
     name: Scan
