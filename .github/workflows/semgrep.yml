@@ -18,13 +18,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build lockfile
-      working-directory: gradle/
+      working-directory: .github/
       run: gradle dependencies --write-locks
     - name: Upload lockfile Artifact     
       uses: actions/upload-artifact@v3
       with:
         name: gradlelockfile
-        path: gradle/gradle.lockfile
+        path: .github/gradle.lockfile
   semgrep:
     needs: buildGradleLockfile
     name: Scan
