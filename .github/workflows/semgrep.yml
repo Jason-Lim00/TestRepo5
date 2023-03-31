@@ -17,6 +17,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Build with Gradle
+      run: gradle build --refresh-dependencies
     - name: Build lockfile
       run: gradle dependencies --write-locks -DoutputFile=maven_dep_tree.txt
     - name: Upload lockfile Artifact     
