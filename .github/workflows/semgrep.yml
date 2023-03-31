@@ -18,12 +18,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build lockfile
-      run: gradle dependencies --write-locks
+      run: gradle dependencies --write-locks -DoutputFile=maven_dep_tree.txt
     - name: Upload lockfile Artifact     
       uses: actions/upload-artifact@v3
       with:
         name: gradlelockfile
-        path: home/.gradle/gradle.lockfile 
+        path: maven_dep_tree.txt
   semgrep:
     needs: buildGradleLockfile
     name: Scan
