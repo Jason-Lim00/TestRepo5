@@ -20,12 +20,12 @@ jobs:
     - name: Build with Gradle
       run: gradle build --refresh-dependencies
     - name: Build lockfile
-      run: gradle dependencies --write-locks -DoutputFile=maven_dep_tree.txt
+      run: gradle dependencies --write-locks 
     - name: Upload lockfile Artifact     
       uses: actions/upload-artifact@v3
       with:
         name: gradlelockfile
-        path: maven_dep_tree.txt
+        path: gradle.lockfile
   semgrep:
     needs: buildGradleLockfile
     name: Scan
