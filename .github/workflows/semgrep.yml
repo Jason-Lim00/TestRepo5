@@ -17,8 +17,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Build with Gradle
-      run: gradle build --refresh-dependencies
     - name: Build lockfile
       run: gradle dependencies --write-locks 
     - name: Upload lockfile Artifact     
@@ -36,4 +34,8 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
+    - name: Download artifact from previous job
+      uses: actions/download-artifact@v3
+      with:
+        name: gradlelockfile
     - run: semgrep ci 
