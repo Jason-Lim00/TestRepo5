@@ -28,14 +28,13 @@ jobs:
     needs: buildGradleLockfile
     name: Scan
     runs-on: ubuntu-latest
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    container:
-      image: returntocorp/semgrep
+    if: (github.actor != 'dependabot[bot]')
     steps:
-    - uses: actions/checkout@v3
-    - name: Download artifact from previous job
-      uses: actions/download-artifact@v3
-      with:
-        name: gradlelockfile
-    - run: semgrep ci 
+      - uses: actions/checkout@v2
+      - name: Download artifact from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: gradlelockfile
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
