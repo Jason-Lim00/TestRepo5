@@ -2,35 +2,17 @@ on:
   pull_request: {}
   push:
     branches:
-    - main
     - master
     paths:
     - .github/workflows/semgrep.yml
 name: Semgrep
 jobs:
-  buildGradleLockfile: 
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build lockfile
-      run: gradle dependencies --write-locks 
-    - name: Upload lockfile Artifact     
-      uses: actions/upload-artifact@v3
-      with:
-        name: gradlelockfile
-        path: gradle.lockfile
   semgrep:
-    needs: buildGradleLockfile
     name: Scan
     runs-on: ubuntu-latest
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    container:
-      image: returntocorp/semgrep
+    if: github.actor != 'dependabot[bot]' && github.event.comment.body != '/pants'
     steps:
     - uses: actions/checkout@v3
-    - name: Download artifact from previous job
-      uses: actions/download-artifact@v3
+    - uses: returntocorp/semgrep-action@v1
       with:
-        name: gradlelockfile
-    - run: semgrep ci --verbose
+        publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
