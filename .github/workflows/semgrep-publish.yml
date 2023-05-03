@@ -19,5 +19,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
-        semgrep install-semgrep-pro
-        semgrep --validate --config test.yaml
+        semgrep --pro --validate --config test.yaml
