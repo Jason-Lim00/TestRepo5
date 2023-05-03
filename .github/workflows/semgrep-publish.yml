@@ -1,0 +1,22 @@
+name: semgrep-publish
+
+on:
+  push:
+    branches:
+    - develop
+    - main
+    - master
+    paths:
+    - .github/workflows/semgrep-publish.yml
+jobs:
+  publish:
+    name: public-private-semgrep-rules
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: semgrep-rules
+    - name: publish private semgrep rules
+      run: |
+        docker run --env SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN --rm -v ${GITHUB_WORKSPACE}/semgrep-rules:/src returntocorp/semgrep:develop semgrep --validate --config test.yaml
+        SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
