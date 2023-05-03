@@ -1,0 +1,9 @@
+rules:
+  - id: apex.test
+    mode: search
+    severity: ERROR
+    languages:
+      - apex
+    metadata:
+      category: security
+    pattern: Database.query(<... $P ...>)
