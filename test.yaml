@@ -2,6 +2,7 @@ rules:
   - id: apex.test
     mode: search
     severity: ERROR
+    message: Semgrep test apex rule
     languages:
       - apex
     metadata:
