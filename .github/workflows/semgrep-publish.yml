@@ -18,5 +18,6 @@ jobs:
         path: semgrep-rules
     - name: publish private semgrep rules
       run: |
-        docker run --env SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN returntocorp/semgrep:develop semgrep --version
+        docker run --env SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN returntocorp/semgrep:develop semgrep --validate --config test.yaml
+      env:
         SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
