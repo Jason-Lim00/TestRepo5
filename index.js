@@ -16,7 +16,7 @@ function hello() {
 
 hello();
 
-function notExposedVuln(args) {
-  //const args = ["a", "b", "c", "d"]
+function notExposedVuln() {
+  const args = ["a", "b", "c", "d"]
   console.log(minimist(args))
 }
